@@ -1,6 +1,5 @@
 import requests
 import json
-from pymongo import MongoClient, DESCENDING
 import pandas as pd
 import time
 import datetime as dt
