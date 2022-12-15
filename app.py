@@ -111,7 +111,9 @@ st.markdown(
 
 st.write("----")
 # Code to get the list of users
-user_data = st.file_uploader("Upload a csv file with the Email ID of users")
+user_data = st.file_uploader(
+    'Upload a csv file with the Email ID of users. Keep a single column with "Email" as header'
+)
 
 
 st.write("")
