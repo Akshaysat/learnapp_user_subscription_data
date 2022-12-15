@@ -119,7 +119,7 @@ user_data = st.file_uploader(
 st.write("")
 
 # Code to get the subscription data of users
-if st.button("Find Completion %"):
+if st.button("Fetch Data"):
 
     user_data = pd.read_csv(user_data)
 
