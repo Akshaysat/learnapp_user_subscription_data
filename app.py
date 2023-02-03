@@ -77,10 +77,9 @@ def user_access(email):
                     break
 
         if flag == "active":
-            return "Paid User"
-
+            return f"Paid User_{latest_expiry_date}"
         elif flag == "expired":
-            return "Expired User"
+            return f"Expired User_{latest_expiry_date}"
 
         else:
             return "Non Paid User"
@@ -131,10 +130,15 @@ if st.button("Fetch Data"):
         col1, col2, col3, col4 = st.columns(4)
 
         with col1:
-            st.metric("Paid Users", (user_data["status"] == "Paid User").sum())
+            st.metric(
+                "Paid Users", (user_data["status"].str.contains("Paid User").sum())
+            )
 
         with col2:
-            st.metric("Expired Users", (user_data["status"] == "Expired User").sum())
+            st.metric(
+                "Expired Users",
+                (user_data["status"].str.contains("Expired User").sum()),
+            )
 
         with col3:
             st.metric("Non-Paid Users", (user_data["status"] == "Non Paid User").sum())
@@ -143,6 +147,12 @@ if st.button("Fetch Data"):
             st.metric("Non LA User", (user_data["status"] == "Non LA User").sum())
 
         st.write("")
+        user_data["expiry_date"] = user_data["status"].apply(
+            lambda x: x[-10:] if len(x) > 15 else None
+        )
+        user_data["status"] = user_data["status"].apply(
+            lambda x: x[:-11] if len(x) > 15 else x
+        )
 
         @st.cache
         def convert_df(df):
