@@ -82,13 +82,13 @@ def user_access(email):
             return f"Expired User_{latest_expiry_date}"
 
         else:
-            return "Non Paid User"
+            return "Non paid user"
 
     except:
         if userid == -1:
             return "Non LA User"
         else:
-            return "Non Paid User - issue"
+            return "Non paid user - issue"
 
 
 # Frontend
@@ -141,7 +141,7 @@ if st.button("Fetch Data"):
             )
 
         with col3:
-            st.metric("Non-Paid Users", (user_data["status"] == "Non Paid User").sum())
+            st.metric("Non-Paid Users", (user_data["status"] == "Non paid user").sum())
 
         with col4:
             st.metric("Non LA User", (user_data["status"] == "Non LA User").sum())
