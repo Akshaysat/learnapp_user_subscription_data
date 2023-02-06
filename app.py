@@ -39,13 +39,14 @@ def fetch_userid(email):
 
 # If the user has subscribed to LearnApp or not
 def user_access(email):
+    print(email)
     email = email.strip().lower()
 
     flag = False
     today_date = dt.datetime.now().strftime("%Y-%m-%d")
+    userid = fetch_userid(email)
 
     try:
-        userid = fetch_userid(email)
         url = "https://hydra.prod.learnapp.com/kraken/users/" + str(userid)
 
         payload = {}
